@@ -36,6 +36,7 @@ function activate(context) {
 			
 			if(difference == 'j'){
 				
+				
 			}
 			//do something with document.
 		});

@@ -1,38 +1,48 @@
 var hx = require("hbuilderx");
+var mode =require("./mode.js");
 
 var escCount = 0;
+var currMode = mode.normal;
 
-var escCount = 0;
 
 //该方法将在插件激活的时候调用
 function activate(context) {
 	let vimerCfg = hx.workspace.getConfiguration("vimer");
-	let enableVimer = vimerCfg.get("enable");
-	
+	let enable = vimerCfg.get("enable");
+	console.log(currMode)
+
 	let editorConfig = hx.workspace.getConfiguration("editor");
 	escCount++;
-	if(escCount % 2 ==0){
-		editorConfig.update("careWidth",3);
-	}else{
-		editorConfig.update("careWidth",2);
+	if (escCount % 2 == 0) {
+		mode = "normal";
+		editorConfig.update("careWidth", 3);
+	} else {
+		mode = "insert";
+		editorConfig.update("careWidth", 2);
 	}
-	
-	hx.window.getActiveTextEditor().then(editor=>{
+
+
+
+	hx.window.getActiveTextEditor().then(editor => {
 		let oldText = editor.document.getText();
-		
-		let onDidChangeTextDocumentEventDispose = hx.workspace.onDidChangeTextDocument(function(event){
-		        let document = event.document;
-				let newText = document.getText();
+
+		let onDidChangeTextDocumentEventDispose = hx.workspace.onDidChangeTextDocument(function(event) {
+			let document = event.document;
+			let newText = document.getText();
+
+			let difference = newText.replace(oldText, '');
+
+			console.log(difference);
+			
+			if(difference == 'j'){
 				
-				let balance = newText.replace(oldText,'');
-				
-				console.log(balance);
-		        //do something with document.
-		    });
-		context.subscriptions.push(onDidChangeTextDocumentEventDispose);	
+			}
+			//do something with document.
+		});
+		context.subscriptions.push(onDidChangeTextDocumentEventDispose);
 	})
-		
-	
+
+
 	let disposable = hx.commands.registerCommand('extension.helloWorld', () => {
 		hx.window.showInformationMessage('你好，这是我的第一个插件扩展。');
 	});

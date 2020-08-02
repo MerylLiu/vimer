@@ -1,0 +1,37 @@
+{
+	"name": "Vimer",
+	"description": "a vim extension for hbuiderx",
+	"displayName": "Vimer",
+	"version": "1.0.0",
+	"publisher": "Meryl",
+	"engines": {
+		"HBuilderX": "^2.7.0"
+	},
+	"categories": [
+		"Other"
+	],
+	"main": "./extension",
+	"activationEvents": [
+		"*"
+	],
+	"contributes": {
+		"commands": [{
+			"command": "extension.helloWorld",
+			"title": "Hello Worlddd"
+		}],
+		"configuration":{
+			"title":"Vimer",
+			"properties":{
+				"vimer.enable":{
+					"type":"boolean",
+					"default":true,
+					"description":"启用Vimer"
+				}
+			}
+		}
+	},
+	"extensionDependencies": [
+		"plugin-manager"
+	],
+	"dependencies": {}
+}

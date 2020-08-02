@@ -1,2 +1,1 @@
-# vimer
-a vim extension for hbulderx
+# vim Extension For HBuilderX
